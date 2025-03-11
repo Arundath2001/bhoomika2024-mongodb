@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './City.css';
 import CityForm from "./CityForm";
 import axios from 'axios';
+import { axiosInstance } from "../lib/axios";
 
 function City({ isFormOpen, formMode, setIsFormOpen, selectedIds, setSelectedIds, dataChanged, searchQuery }) {
     const [data, setData] = useState([]);
@@ -9,7 +10,7 @@ function City({ isFormOpen, formMode, setIsFormOpen, selectedIds, setSelectedIds
     useEffect(() => {
         const fetchCities = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/cities');
+                const response = await axiosInstance.get('/cities');
                 setData(response.data.cities);
             } catch (error) {
                 console.error("Error fetching cities", error);
